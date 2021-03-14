@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class LoginController {
-    @Autowired
-    private UserRepository userRepository;
 
     @RequestMapping("/login")
     public String login(Model m){

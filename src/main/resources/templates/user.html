@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All User List</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+
+<body>
+
+<br><br>
+<div class="container">
+    <div class="nav"> </div>
+
+    <div class="row">
+        <div class="col-2">
+            <a th:href="@{/user/reset-pass}">Reset Password</a>
+        </div>
+
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-3"> </div>
+
+        <div class="col-md-4 card" style="width: 18rem;">
+            <div class="card-body">
+
+
+                First Name : <a th:text="${user.firstName}"></a><br>
+                Last Name : <a th:text="${user.lastName}"></a><br>
+                Address : <a th:text="${user.address}"> </a><br>
+                Phone Number : <a th:text="${user.phoneNumber}"> </a><br>
+                Email : <a th:text="${user.username}"></a><br>
+                BirthDate : <a th:text="${user.birthdate}"> </a><br>
+                Role : <a th:text="${user.roleName}"> </a>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-4"> </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-5"></div>
+        <div class="col-md-2">
+            <br><br><br>
+            <a th:href="@{/logout}">LOGOUT</a>
+        </div>
+        <div class="col-md-5"></div>
+    </div>
+</div>
+</body>
+</html>

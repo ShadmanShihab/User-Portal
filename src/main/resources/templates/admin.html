@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All User List</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+
+<body>
+<br>
+
+
+</div>
+<br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 text-center"><h2>Hi ADMIN</h2></div>
+        <div class="col-md-3">
+            <input type="text" placeholder="search a user" name="userName"/><br><br>
+        </div>
+
+    </div>
+    <br>
+
+    <div class="row text-center">
+        <div class="col-md-12">
+
+            <table th:class="table">
+
+                <thead>
+                <tr bgcolor="aqua">
+
+
+                    <td>Name</td>
+                    <td>Age</td>
+                    <td>Email</td>
+                    <td>Phone</td>
+                </tr>
+                </thead>
+
+                <tbody class="table-body"></tbody>
+
+            </table>
+            <br> <br>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-5"></div>
+        <div class="col-md-2">
+            <br><br><br>
+            <a th:href="@{/logout}">LOGOUT</a>
+        </div>
+        <div class="col-md-5"></div>
+    </div>
+</div>
+
+<script th:src="@{/js/jquery-3.1.1.min.js}"></script>
+<script th:src="@{/js/jquery-ui.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/admin.js}"></script>
+</body>
+</html>

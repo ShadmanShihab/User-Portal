@@ -1,9 +1,6 @@
 package com.registration.userportal.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -18,7 +15,7 @@ public class User implements UserDetails {
     private int id;
 
     @Column
-    private String userName;
+    private String username;
     @Column
     private String firstName;
     @Column
@@ -27,10 +24,6 @@ public class User implements UserDetails {
     private String Address;
     @Column
     private int phoneNumber;
-    @Column
-    private String email;
-    @Column
-    private int age;
     @Column
     private LocalDate birthDate;
     @Column
@@ -46,9 +39,8 @@ public class User implements UserDetails {
         this.role = role;
     }
 
-    public User(String userName, String email, String password) {
-        this.userName = userName;
-        this.email = email;
+    public User(String userName, String password) {
+        this.username = userName;
         this.password = password;
     }
 
@@ -88,21 +80,6 @@ public class User implements UserDetails {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
 
     public LocalDate getBirthDate() {
         return birthDate;
@@ -123,7 +100,11 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.userName;
+        return this.username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override
@@ -149,4 +130,5 @@ public class User implements UserDetails {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }

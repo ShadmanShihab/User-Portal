@@ -19,9 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserController {
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private RoleRepository roleRepository;
 
     @Autowired
@@ -30,7 +27,7 @@ public class UserController {
     @GetMapping("/registration")
     public String home(Model m){
         m.addAttribute("user", new UserDto());
-        m.addAttribute("roles", roleRepository.findAlByEnabledRole());
+        m.addAttribute("roles", roleRepository.findAllByEnabledRole());
         m.addAttribute("message", "");
         return "registration";
     }
@@ -38,5 +35,22 @@ public class UserController {
     @PostMapping("/save")
     public String save(@ModelAttribute("user") UserDto userDto, Model m)  {
         String isExist = userService.saveUser(userDto);
+
+        if (isExist.equals("exist")) {
+            m.addAttribute("message", "User with this email already exist.Use a new email.");
+            m.addAttribute("user", new UserDto());
+            m.addAttribute("roles", roleRepository.findAllByEnabledRole());
+            return "registration";
+        } else {
+            m.addAttribute("login_message", "Registration sucessfull. Please login to continue.");
+            return "login";
+        }
+    }
+
+
+    @GetMapping("/home")
+    public String userHomePage(Model m) {
+        m.addAttribute("user", userService.getUser());
+        return "user";
     }
 }

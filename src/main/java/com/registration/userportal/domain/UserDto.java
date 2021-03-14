@@ -12,8 +12,8 @@ public class UserDto {
     private String phoneNumber;
     private String birthdate;
     private int age;
-    private String email;
     private String password;
     private long roleId;
     private String roleName;
+
 }

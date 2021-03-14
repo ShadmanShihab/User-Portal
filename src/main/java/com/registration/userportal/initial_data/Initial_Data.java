@@ -7,10 +7,11 @@ import com.registration.userportal.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
 
 import java.util.stream.Stream;
 
-
+@Component
 public class Initial_Data implements CommandLineRunner {
 
     @Autowired
@@ -32,9 +33,9 @@ public class Initial_Data implements CommandLineRunner {
                 .forEach(System.out::println);
 
         String password = passwordEncoder.encode(("admin"));
-        User admin = new User("admin", "admin@localhost.local", password);
+        User admin = new User("admin@localhost.local", password);
 
-        if(!userRepository.existsByEmail(admin.getEmail())){
+        if(!userRepository.existsByUsername(admin.getUsername())){
             admin.setRole(role1);
             userRepository.save(admin);
             role1.setEnabled(false);
