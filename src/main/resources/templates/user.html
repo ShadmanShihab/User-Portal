@@ -3,25 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>All User List</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+   <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">-->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/customCss.css}">
 </head>
 
 <body>
 
-<br><br>
-<div class="container">
-    <div class="nav"> </div>
+<div class="container" style="margin: 0px; padding: 0px">
 
     <div class="row">
-        <div class="col-2">
-            <a th:href="@{/user/reset-pass}">Reset Password</a>
+        <div class="col-sm-12">
+            <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+                <a class="navbar-brand" th:href="@{/user/home}">Profile</a>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a th:text="${user.firstName}"></a>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="margin-left: 800px">
+                        <a class="dropdown-item" >Logout</a>
+                        <a class="dropdown-item" >Change Password</a>
+                    </div>
+                </li>
+            </nav>
         </div>
-
     </div>
+
+
+
+
     <br>
-    <div class="row">
-        <div class="col-md-3"> </div>
+
+    <div class="col-md-2 card">
+
+<!--        <div class="sidenav">-->
+<!--            <a th:href="@{/user/home}">Profile Page</a>-->
+<!--            <a th:href="@{reset-pass}" >Change Password</a>-->
+<!--        </div>-->
+
+        <a th:href="@{/user/reset-pass}">Reset Password</a>
 
         <div class="col-md-4 card" style="width: 18rem;">
             <div class="card-body">
@@ -51,5 +73,6 @@
         <div class="col-md-5"></div>
     </div>
 </div>
+
 </body>
 </html>

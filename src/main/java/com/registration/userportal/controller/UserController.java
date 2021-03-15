@@ -7,8 +7,6 @@ import com.registration.userportal.model.User;
 import com.registration.userportal.repository.RoleRepository;
 import com.registration.userportal.repository.UserRepository;
 import com.registration.userportal.service.UserService;
-import org.dom4j.rule.Mode;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;

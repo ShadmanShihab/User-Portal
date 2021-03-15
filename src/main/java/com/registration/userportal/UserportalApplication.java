@@ -10,5 +10,4 @@ public class UserportalApplication {
         SpringApplication.run(UserportalApplication.class, args);
         System.out.println("Running..!!");
     }
-
 }
