@@ -1,12 +1,16 @@
 package com.registration.userportal.controller;
 
 
+import com.registration.userportal.domain.ResetPasswordDto;
 import com.registration.userportal.domain.UserDto;
+import com.registration.userportal.model.User;
 import com.registration.userportal.repository.RoleRepository;
 import com.registration.userportal.repository.UserRepository;
 import com.registration.userportal.service.UserService;
 import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,30 +18,38 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.text.ParseException;
+
+
 @Controller
 @RequestMapping("/user")
 public class UserController {
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final UserService userService;
+    private final BCryptPasswordEncoder encoder;
 
-    @Autowired
-    private RoleRepository roleRepository;
-
-    @Autowired
-    private UserService userService;
+    public UserController(UserRepository userRepository, RoleRepository roleRepository, UserService userService, BCryptPasswordEncoder encoder) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.userService = userService;
+        this.encoder = encoder;
+    }
 
     @GetMapping("/registration")
-    public String home(Model m){
+    public String home(Model m) {
         m.addAttribute("user", new UserDto());
         m.addAttribute("roles", roleRepository.findAllByEnabledRole());
         m.addAttribute("message", "");
         return "registration";
     }
 
-    @PostMapping("/save")
-    public String save(@ModelAttribute("user") UserDto userDto, Model m)  {
-        String isExist = userService.saveUser(userDto);
 
+    @PostMapping("/save")
+    public String save(@ModelAttribute() UserDto userDto, Model m) throws ParseException {
+        String isExist = userService.saveUser(userDto);
         if (isExist.equals("exist")) {
-            m.addAttribute("message", "User with this email already exist.Use a new email.");
+            m.addAttribute("message", "User with this email already exist. Enter a new email to complete registration");
             m.addAttribute("user", new UserDto());
             m.addAttribute("roles", roleRepository.findAllByEnabledRole());
             return "registration";
@@ -47,10 +59,15 @@ public class UserController {
         }
     }
 
-
     @GetMapping("/home")
     public String userHomePage(Model m) {
         m.addAttribute("user", userService.getUser());
         return "user";
+    }
+
+    @GetMapping
+    public String resetPassword(Model m){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
     }
 }

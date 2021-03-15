@@ -61,7 +61,7 @@ public class UserService implements UserDetailsService {
         BeanUtils.copyProperties(user, userDto);
         userDto.setRoleName(user.getRole().getAuthority());
 
-        userDto.setBirthdate(user.getBirthDate().toString());
+        userDto.setBirthdate(user.getBithdate().toString());
         return userDto;
     }
 }
