@@ -1,5 +1,6 @@
 package com.registration.userportal.service;
 
+import com.registration.userportal.domain.ResetPasswordDto;
 import com.registration.userportal.domain.UserDto;
 import com.registration.userportal.model.Role;
 import com.registration.userportal.model.User;
@@ -23,7 +24,7 @@ public class UserService implements UserDetailsService {
     @Autowired
     private RoleRepository roleRepository;
     @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    private BCryptPasswordEncoder encoder;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -38,7 +39,7 @@ public class UserService implements UserDetailsService {
         }
         else{
             Role role = roleRepository.findById(userDto.getRoleId()).orElseThrow();
-            String pass = passwordEncoder.encode(userDto.getPassword());
+            String pass = encoder.encode(userDto.getPassword());
 
             User user = new User();
 
@@ -63,5 +64,21 @@ public class UserService implements UserDetailsService {
 
         userDto.setBirthdate(user.getBithdate().toString());
         return userDto;
+    }
+
+    public String savePassword(ResetPasswordDto resetPasswordDto) {
+        User user = userRepository.findById(resetPasswordDto.getUserId()).get();
+        String currentPassword = resetPasswordDto.getCurrentPassword();
+        String newPassword = resetPasswordDto.getNewPassword();
+        String confirmPassword = resetPasswordDto.getConfirmPassword();
+
+        if(encoder.matches(currentPassword, user.getPassword()) && newPassword.equals(confirmPassword)){
+            user.setPassword(encoder.encode(newPassword));
+            userRepository.save(user);
+            return "redirect:/user/home";
+        }
+        else{
+            return "reset-password";
+        }
     }
 }

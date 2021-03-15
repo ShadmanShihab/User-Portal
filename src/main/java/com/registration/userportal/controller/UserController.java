@@ -65,9 +65,22 @@ public class UserController {
         return "user";
     }
 
-    @GetMapping
-    public String resetPassword(Model m){
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    @GetMapping("/test")
+    public String showTest(){
+        return "home";
+    }
 
+    @GetMapping("/reset-pass")
+    public String showResetPasswordPage(Model m) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        m.addAttribute("message", " ");
+        m.addAttribute("reset", new ResetPasswordDto(user.getUserId()));
+        return "reset-password";
+    }
+
+    @PostMapping("/reset-pass/save")
+    public String savePassword(@ModelAttribute("reset") ResetPasswordDto resetPasswordDto, Model m) {
+        String resetPasswordValidation = userService.savePassword(resetPasswordDto);
+        return resetPasswordValidation;
     }
 }
