@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     $.ajax({
-        url: '/admins/get-all',
+        url: '/admin/get-all',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -27,7 +27,7 @@ $(document).ready(function () {
         var username = new String(name);
         if (username.length==0){
             $.ajax({
-                url: '/admins/get-all',
+                url: '/admin/get-all',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -52,7 +52,7 @@ $(document).ready(function () {
         else {
             $.ajax({
                 type: 'GET',
-                url: "/admins/get-users/"+name,
+                url: "/admin/get-users/"+name,
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -77,21 +77,4 @@ $(document).ready(function () {
         }
 
     });
-
-
-    // $.fn.serializeObject = function () {
-    //     var o = {};
-    //     var a = this.serializeArray();
-    //     $.each(a, function () {
-    //         if (o[this.name] !== undefined) {
-    //             if (!o[this.name].push) {
-    //                 o[this.name] = [o[this.name]];
-    //             }
-    //             o[this.name].push(this.value || '');
-    //         } else {
-    //             o[this.name] = this.value || '';
-    //         }
-    //     });
-    //     return o;
-    // };
 });
