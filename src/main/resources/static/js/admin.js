@@ -58,9 +58,8 @@ $(document).ready(function () {
                     'Content-Type': 'application/json'
                 },
                 success: function (resp) {
-
+                    $(".table-body tr").remove();
                     $.each(resp, function (i, item) {
-                        $(".table-body tr").remove();
                         var row = `<tr>
                                  <td>${item.firstName} ${item.lastName}</td>
                                  <td>${item.age}</td>

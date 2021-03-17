@@ -253,11 +253,13 @@
                             </div>
 
                             <div class="form-group mt-3">
-                                <label>Role</label>
-                                <select name="role" class="form-control " th:field="*{roleId}">
-                                    <option th:each="role : ${roles}"
+                                <label style="margin-right: 20px">Role</label>
+                                <select style="padding: -10px" name="role" class="form-control " th:field="*{roleId}">
+
+                                        <option th:each="role : ${roles}"
                                             th:value="${role.roleId}"
                                             th:text="${role.authority}"></option>
+
                                 </select>
                             </div>
 
