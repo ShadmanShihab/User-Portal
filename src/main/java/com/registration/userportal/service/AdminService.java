@@ -47,7 +47,7 @@ public class AdminService {
             LocalDate current = LocalDate.now();
             LocalDate birthDate = u.getBirthDate();
 
-            int age = Period.between(current, birthDate).getYears();
+            int age = Period.between(birthDate, current).getYears();
             userDto.setAge(age);
             userDtoList.add(userDto);
         }
