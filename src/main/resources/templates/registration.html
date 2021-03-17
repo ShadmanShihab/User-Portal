@@ -158,6 +158,7 @@
                 <div class="row">
                     <div class="col-12 text-center">
                         <h2 class="tm-block-title mb-4">Create New Account</h2>
+                        <div class="text-danger " th:text="${message}"></div>
                     </div>
                 </div>
                 <div class="row mt-2">
@@ -254,7 +255,7 @@
 
                             <div class="form-group mt-3">
                                 <label style="margin-right: 20px">Role</label>
-                                <select style="padding: -10px" name="role" class="form-control " th:field="*{roleId}">
+                                <select name="role" class="form-control " th:field="*{roleId}">
 
                                         <option th:each="role : ${roles}"
                                             th:value="${role.roleId}"
@@ -291,15 +292,11 @@
     <div class="col-12 font-weight-light">
         <p class="text-center text-white mb-0 px-4 small">
             Copyright &copy; <b>2021</b> All rights reserved.
-
-            <!--            Design: <a rel="nofollow noopener" href="https://templatemo.com" class="tm-footer-link">Template Mo</a>-->
         </p>
     </div>
 </footer>
 <script th:src="@{js/jquery-3.3.1.min.js}"></script>
-<!-- https://jquery.com/download/ -->
 <script th:src="@{js/bootstrap.min.js}"></script>
-<!-- https://getbootstrap.com/ -->
 <script th:src="@{/js/admin.js}"></script>
 </body>
 </html>
