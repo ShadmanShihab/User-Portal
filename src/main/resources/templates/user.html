@@ -1,78 +1,148 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>All User List</title>
-   <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">-->
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/css/customCss.css}">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>User Homepage - User Information</title>
+    <link
+            rel="stylesheet"
+            th:href="@{https://fonts.googleapis.com/css?family=Roboto:400,700}"
+    />
+    <!-- https://fonts.google.com/specimen/Open+Sans -->
+    <link rel="stylesheet" th:href="@{/css/fontawesome.min.css}" />
+    <!-- https://fontawesome.com/ -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <!-- https://getbootstrap.com/ -->
+    <link rel="stylesheet" th:href="@{/css/templatemo-style.css}">
+
 </head>
+
+
+
 
 <body>
 
-<div class="container" style="margin: 0px; padding: 0px">
 
-    <div class="row">
-        <div class="col-sm-12">
-            <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-                <a class="navbar-brand" th:href="@{/user/home}">Profile</a>
+<nav class="navbar navbar-expand-xl">
+<div class="container h-100">
+    <a class="navbar-brand"  th:href="@{/user/home}">
+        <h1 class="tm-site-title mb-0">User Portal</h1>
+    </a>
+    <button
+            class="navbar-toggler ml-auto mr-0"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+    >
+        <i class="fas fa-bars tm-nav-icon"></i>
+    </button>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <a th:text="${user.firstName}"></a>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="margin-left: 800px">
-                        <a class="dropdown-item" >Logout</a>
-                        <a class="dropdown-item" >Change Password</a>
-                    </div>
-                </li>
-            </nav>
-        </div>
-    </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto h-100">
+            <li class="nav-item">
+                <a class="nav-link disabled"  href="">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                    <span class="sr-only"></span>
+                </a>
+            </li>
 
-
-
-
-    <br>
-
-    <div class="col-md-2 card">
-
-<!--        <div class="sidenav">-->
-<!--            <a th:href="@{/user/home}">Profile Page</a>-->
-<!--            <a th:href="@{reset-pass}" >Change Password</a>-->
-<!--        </div>-->
-
-        <a th:href="@{/user/reset-pass}">Reset Password</a>
-
-        <div class="col-md-4 card" style="width: 18rem;">
-            <div class="card-body">
-
-
-                First Name : <a th:text="${user.firstName}"></a><br>
-                Last Name : <a th:text="${user.lastName}"></a><br>
-                Address : <a th:text="${user.address}"> </a><br>
-                Phone Number : <a th:text="${user.phoneNumber}"> </a><br>
-                Email : <a th:text="${user.username}"></a><br>
-                BirthDate : <a th:text="${user.birthdate}"> </a><br>
-                Role : <a th:text="${user.roleName}"> </a>
-            </div>
-        </div>
+            <li class="nav-item">
+                <a class="nav-link active" th:href="@{/user/home}">
+                    <i class="far fa-user"></i> Accounts
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a
+                        class="nav-link dropdown-toggle"
+                        th:href="@{/user/reset-pass}"
 
 
+                >
+                    <i class="fas fa-cog" ></i>
+                    <span > Change Password <i class="fas fa-angle-down" ></i> </span>
+                </a>
 
-        <div class="col-md-4"> </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-5"></div>
-        <div class="col-md-2">
-            <br><br><br>
-            <a th:href="@{/logout}">LOGOUT</a>
-        </div>
-        <div class="col-md-5"></div>
+            </li>
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link d-block" onclick="return confirm('Do you want to Log Out?')" th:href="@{/logout}">
+                     <b> Logout</b>
+                </a>
+            </li>
+        </ul>
     </div>
 </div>
+</nav>
+
+
+
+
+
+<div class="tm-block-col tm-col-account-settings container mt-5">
+    <h2 class="tm-block-h-auto text-light font-weight-bold pb-3 h2 container">Welcome, <span sec:authentication="principal.firstName">Firstname</span></h2>
+
+    <div class="tm-bg-primary-dark tm-block tm-block-settings">
+        <h2 class="tm-block-title">Account Information</h2>
+        <div >
+            <div >
+                <div class="card-body">
+                    <table class="table table-hover table-striped">
+                        <tbody>
+                        <tr>
+                            <th scope="col">First Name </th>
+                            <th><a th:text="${user.firstName}"></a> </th>
+                        </tr>
+                        <tr>
+                            <th >Last name </th>
+                            <th><a th:text="${user.lastName}"></a></th>
+                        </tr>
+                        <tr>
+                            <th scope="col">Address</th>
+                            <th><a th:text="${user.address}"> </a></th>
+                        </tr>
+                        <tr>
+                            <th >Phone Number</th>
+                            <th><a th:text="${user.phoneNumber}"> </a><br></th>
+                        </tr>
+                        <tr>
+                            <th scope="col">Email</th>
+                            <th scope="col"><a th:text="${user.username}"></a><br></th>
+                        </tr>
+                        <tr>
+                            <td >Birth Date</td>
+                            <th><a th:text="${user.birthdate}"> </a></th>
+                        </tr>
+
+                        <tr>
+                            <td>Role</td>
+                            <th><a th:text="${user.roleName}"> </a></th>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<footer class="tm-footer row tm-mt-small">
+    <div class="col-12 font-weight-light">
+        <p class="text-center text-white mb-0 px-4 small">
+            Copyright &copy; <b>2021</b> All rights reserved.
+
+         </p>
+    </div>
+</footer>
+<script th:src="@{js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{js/bootstrap.min.js}"></script>
 
 </body>
 </html>

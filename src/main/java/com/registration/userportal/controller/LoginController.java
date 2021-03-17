@@ -13,16 +13,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LoginController {
     @RequestMapping("/")
     public String home(Model m){
-        //m.addAttribute("login_message", "");
+        m.addAttribute("login_message", "");
         return "login";
     }
 
 
     @RequestMapping("/login")
-    public String login(Model m){
-        //m.addAttribute("login_message", "");
+    public String login(Model m) {
+        m.addAttribute("login_message", "");
         return "login";
     }
+
 
     @RequestMapping("/login-success")
     public String loginSuccess(Model m){
@@ -40,5 +41,10 @@ public class LoginController {
     @GetMapping("/admin")
     public String adminPage(Model m){
         return "admin";
+    }
+
+    @RequestMapping("/denied")
+    public String denied(){
+        return "denied";
     }
 }

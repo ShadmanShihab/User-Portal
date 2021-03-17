@@ -75,7 +75,7 @@ public class UserService implements UserDetailsService {
         if(encoder.matches(currentPassword, user.getPassword()) && newPassword.equals(confirmPassword)){
             user.setPassword(encoder.encode(newPassword));
             userRepository.save(user);
-            return "redirect:/user/home";
+            return "home";
         }
         else{
             return "reset-password";

@@ -30,7 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                 .authorizeRequests()
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .antMatchers("/user/home", "user/reset-pass", "/user/reset-pass/save").hasAuthority("USER")
-                .antMatchers("/user/registration","/user/save", "/user/test","static/**","/css/**","/js/**","/*").permitAll()
+                .antMatchers("/user/registration","/user/save", "/user/test","static/**","/css/**","/js/**", "/jquery-ui-datepicker/**", "/webfonts/**", "/*").permitAll()
                 .anyRequest().authenticated();
 
         http.formLogin().loginPage("/login").permitAll()
@@ -38,5 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                 .successForwardUrl("/login-success");
 
         http.logout().logoutUrl("/logout");
+
+        http.exceptionHandling().accessDeniedPage("/denied");
     }
 }

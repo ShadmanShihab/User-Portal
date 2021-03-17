@@ -52,10 +52,12 @@ public class UserController {
             m.addAttribute("roles", roleRepository.findAllByEnabledRole());
             return "registration";
         } else {
-            m.addAttribute("login_message", "Registration sucessfull. Please login to continue.");
+            m.addAttribute("login_message", "Registration successfull. Please login to continue.");
             return "login";
         }
     }
+
+
 
     @GetMapping("/home")
     public String userHomePage(Model m) {
@@ -79,6 +81,14 @@ public class UserController {
     @PostMapping("/reset-pass/save")
     public String savePassword(@ModelAttribute("reset") ResetPasswordDto resetPasswordDto, Model m) {
         String resetPasswordValidation = userService.savePassword(resetPasswordDto);
-        return resetPasswordValidation;
+
+        //if reset password is successful
+        if(resetPasswordValidation.equals("home")){
+            return "redirect:/user/home";
+        }
+        else {
+            m.addAttribute("message", "Passsword not match");
+            return "reset-password";
+        }
     }
 }
