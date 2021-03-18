@@ -30,6 +30,7 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = (User) userRepository.findByUsername(email).orElseThrow();
         return user;
+
     }
 
     public String saveUser(UserDto userDto) {
